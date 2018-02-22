@@ -8,11 +8,32 @@
         Title="订单管理" Height="600" Width="820">
     <Grid>
         <TabControl>
-            <TabItem Header="订单">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resource/order.png" Width="20" Height="20"/>
+                        <TextBlock Margin="2" Text="订单"/>
+                    </StackPanel>
+                </TabItem.Header>
                 <local:Deal/>
             </TabItem>
-            <TabItem Header="管理">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resource/management.png" Width="20" Height="20"/>
+                        <TextBlock Margin="2" Text="管理"/>
+                    </StackPanel>
+                </TabItem.Header>
                 <local:Management/>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Resource/note.png" Width="20" Height="20"/>
+                        <TextBlock Margin="2" Text="备忘"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <local:Note/>
             </TabItem>
         </TabControl>
     </Grid>

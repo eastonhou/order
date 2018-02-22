@@ -6,13 +6,6 @@
              xmlns:local="clr-namespace:Order"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="820">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <Style TargetType="ListViewItem">
-                <EventSetter Event="MouseDoubleClick" Handler="EditOrder"/>
-            </Style>
-        </ResourceDictionary>
-    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -45,6 +38,16 @@
             <Button Click="NewEntryButtonClicked" Content="新建" Grid.Column="10" Margin="4"/>
         </Grid>
         <ListView Name="list" Grid.Row="1" ItemsSource="{Binding}" SelectionChanged="SelectionChanged" HorizontalContentAlignment="Stretch">
+            <ListView.Resources>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding CashName}" Value="挂帐">
+                            <Setter Property="Background" Value="#FFFF5700"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                    <EventSetter Event="MouseDoubleClick" Handler="EditOrder"/>
+                </Style>
+            </ListView.Resources>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="日期">

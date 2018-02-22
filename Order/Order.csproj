@@ -63,6 +63,9 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
@@ -112,6 +115,9 @@
     <Compile Include="Management.xaml.cs">
       <DependentUpon>Management.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Note.xaml.cs">
+      <DependentUpon>Note.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utility\Database.cs" />
     <Compile Include="Utility\Environment.cs" />
     <Page Include="ClientEntry.xaml">
@@ -143,6 +149,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Management.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Note.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -186,6 +196,14 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="app.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\management.png" />
+    <Resource Include="Resource\note.png" />
+    <Resource Include="Resource\order.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.107.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.107.0\build\net451\System.Data.SQLite.Core.targets')" />
