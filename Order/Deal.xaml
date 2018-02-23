@@ -10,6 +10,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -137,5 +138,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <TextBlock Name="summaryBox" Margin="4,0" VerticalAlignment="Center"/>
+        </StackPanel>
     </Grid>
 </UserControl>

@@ -1,17 +1,8 @@
 ﻿using Order.Utility;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Linq;
 
 namespace Order
 {
@@ -36,6 +27,7 @@ namespace Order
                 productBox.ItemsSource = db.QueryDependentEntries("PRODUCT");
                 unitBox.ItemsSource = db.QueryDependentEntries("UNIT");
                 cashTypeBox.ItemsSource = db.QueryDependentEntries("CASHTYPE");
+                numberBox.Text = "1";
             }
         }
 
@@ -47,7 +39,7 @@ namespace Order
                 && unitBox.SelectedIndex != -1
                 && cashTypeBox.SelectedIndex != -1
                 && long.TryParse(numberBox.Text, out long _0)
-                && double.TryParse(costBox.Text, out double _1)
+                && ValidateExpression(costBox.Text)
                 && double.TryParse(unitPriceBox.Text, out double _2);
         }
 
@@ -67,7 +59,7 @@ namespace Order
                     CashId = (cashTypeBox.SelectedItem as Entry).Id,
                     CashName = (cashTypeBox.SelectedItem as Entry).Name,
                     Number = long.Parse(numberBox.Text),
-                    Cost = double.Parse(costBox.Text),
+                    Cost = Evaluate(costBox.Text),
                     UnitPrice = double.Parse(unitPriceBox.Text),
                     Date = dateBox.SelectedDate.Value,
                     Comment = commentBox.Text
@@ -77,6 +69,26 @@ namespace Order
             {
                 MessageBox.Show("输入不合法");
             }
+        }
+
+        internal bool ValidateExpression(string expression)
+        {
+            var expr = new NCalc.Expression(expression);
+            try
+            {
+                expr.Evaluate();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        internal double Evaluate(string expression)
+        {
+            var expr = new NCalc.Expression(expression);
+            return (double)Convert.ChangeType(expr.Evaluate(), typeof(double));
         }
 
         internal void UseTemplate(Utility.Order template)

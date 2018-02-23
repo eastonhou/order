@@ -1,6 +1,7 @@
 ﻿using Order.Utility;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -32,6 +33,14 @@ namespace Order
                     dateFilter.IsChecked.Value ? endDate.SelectedDate : null);
                 Orders = new ObservableCollection<Utility.Order>(entries);
                 list.ItemsSource = Orders;
+                var totalCost = Orders.Sum(x => x.Cost);
+                var totalEarn = Orders.Sum(x => x.TotalPrice);
+                var totalPending = Orders.Where(x => x.CashName == "挂帐").Sum(x => x.TotalPrice);
+                var totalCash = Orders.Where(x => x.CashName == "现金").Sum(x => x.TotalPrice);
+                var totalProfit = Orders.Sum(x => x.Profit);
+                summaryBox.Text = $"收入: {totalEarn}({totalCash}+{totalPending}) " +
+                    $"成本: {totalCost} " +
+                    $"盈利: {totalProfit} ";
             }
         }
 
